@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATT School｜TARC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+TC:wght@300;400;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a2e4a;
+      --navy-dark: #0f1d30;
+      --navy-mid: #2a4a6b;
+      --gold: #b8933a;
+      --gold-light: #d4aa55;
+      --gold-pale: rgba(184,147,58,0.6);
+      --lavender: #7c6fa0;
+      --lavender-light: #a899c4;
+      --cream: #f8f4ee;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans TC', sans-serif; background: var(--navy-dark); color: white; overflow-x: hidden; }
+
+    /* NAV */
+    nav { background: var(--navy-dark); border-bottom: 1px solid rgba(184,147,58,0.2); padding: 0 40px; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+    .nav-logo { font-family: 'Playfair Display', serif; color: var(--gold-light); font-size: 1.75rem; letter-spacing: 3px; text-decoration: none; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 1.1rem; letter-spacing: 1px; font-weight: 500; transition: color 0.2s; position: relative; padding-bottom: 4px; }
+    .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--gold-light); transition: width 0.25s; }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--gold-light); }
+    .nav-links a.active::after { width: 100%; }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: var(--hero-img);
+      background-size: cover;
+      background-position: center top;
+      filter: brightness(0.45) saturate(0.8);
+      transform: scale(1.04);
+      transition: transform 8s ease;
+    }
+    .hero:hover .hero-bg { transform: scale(1); }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(15,29,48,0.2) 0%,
+        rgba(90,70,130,0.25) 40%,
+        rgba(15,29,48,0.85) 100%
+      );
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center;
+      padding: 0 24px;
+      animation: fadeUp 1s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-label {
+      font-size: 1.03rem; letter-spacing: 4px; color: var(--gold-pale);
+      text-transform: uppercase; margin-bottom: 20px;
+      font-family: 'Noto Sans TC', sans-serif; font-weight: 300;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: 2px;
+      color: white;
+      text-shadow: 0 2px 40px rgba(0,0,0,0.5);
+      margin-bottom: 16px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--lavender-light);
+    }
+    .hero-subtitle {
+      font-family: 'Noto Serif TC', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 3px;
+      font-weight: 300;
+      margin-bottom: 48px;
+    }
+    .hero-divider {
+      width: 60px; height: 1px;
+      background: var(--gold);
+      margin: 0 auto 48px;
+      opacity: 0.7;
+    }
+    .hero-tagline {
+      display: inline-block;
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.7);
+      font-weight: 300;
+      letter-spacing: 2px;
+      border: 1px solid rgba(184,147,58,0.35);
+      padding: 10px 28px;
+      backdrop-filter: blur(6px);
+      background: rgba(255,255,255,0.04);
+    }
+    .hero-scroll {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.4); font-size: 0.97rem; letter-spacing: 3px;
+      animation: bounce 2s ease infinite;
+    }
+    .hero-scroll::after { content: '↓'; font-size: 1.45rem; }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* SECTION */
+    .section { padding: 100px 40px; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .section-label { font-size: 0.97rem; letter-spacing: 4px; color: var(--gold-pale); text-transform: uppercase; margin-bottom: 14px; font-weight: 300; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; color: white; margin-bottom: 20px; line-height: 1.2; }
+    .section-line { width: 48px; height: 2px; background: var(--gold); margin-bottom: 40px; }
+
+    /* INTRO */
+    .intro-text { font-size: 1.3rem; line-height: 2; color: rgba(255,255,255,0.75); font-weight: 300; margin-bottom: 24px; font-family: 'Noto Serif TC', serif; }
+    .intro-quote {
+      border-left: 3px solid var(--lavender);
+      padding: 16px 28px;
+      margin: 40px 0;
+      background: rgba(124,111,160,0.1);
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.35rem;
+      color: var(--lavender-light);
+      letter-spacing: 1px;
+      line-height: 1.9;
+    }
+
+    /* FEATURES */
+    .features { background: rgba(255,255,255,0.03); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; }
+    .feature-item { text-align: center; }
+    .feature-icon { font-size: 2.25rem; margin-bottom: 16px; display: block; }
+    .feature-title { font-family: 'Noto Serif TC', serif; font-size: 1.25rem; color: var(--gold-light); margin-bottom: 10px; letter-spacing: 1px; }
+    .feature-desc { font-size: 1.13rem; color: rgba(255,255,255,0.55); line-height: 1.8; font-weight: 300; }
+
+    /* PHOTO */
+    .photo-section { background: var(--navy-dark); }
+    .photo-frame {
+      width: 100%; max-width: 760px; margin: 0 auto;
+      border: 1px solid rgba(184,147,58,0.25);
+      overflow: hidden;
+      position: relative;
+    }
+    .photo-frame img { width: 100%; height: 520px; display: block; object-fit: cover; object-position: center 30%; }
+    .photo-caption {
+      background: rgba(15,29,48,0.9);
+      padding: 18px 28px;
+      font-size: 1.1rem; color: rgba(255,255,255,0.5);
+      letter-spacing: 1px; font-weight: 300;
+      border-top: 1px solid rgba(184,147,58,0.15);
+      text-align: center;
+    }
+
+    /* JOURNEY STAGES */
+    .journey-stage {
+      border: 1px solid rgba(184,147,58,0.2);
+      margin-bottom: 32px;
+      overflow: hidden;
+    }
+    .journey-header {
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+      padding: 24px 28px;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(184,147,58,0.15);
+    }
+    .journey-badge {
+      background: var(--navy-mid);
+      color: var(--gold-light);
+      font-size: 1.0rem; font-weight: 700; letter-spacing: 2px;
+      padding: 6px 16px;
+      flex-shrink: 0;
+    }
+    .journey-meta { flex: 1; min-width: 180px; }
+    .journey-title { font-family: 'Noto Serif TC', serif; font-size: 1.3rem; color: white; font-weight: 700; margin-bottom: 4px; }
+    .journey-period { font-size: 1.03rem; color: rgba(255,255,255,0.35); letter-spacing: 1px; }
+    .journey-keyword {
+      font-size: 1.07rem; color: var(--lavender-light);
+      letter-spacing: 0.5px; font-style: italic;
+      border-left: 2px solid var(--lavender);
+      padding-left: 12px;
+      flex-shrink: 0;
+    }
+    .journey-body { padding: 28px 28px 24px; }
+    .journey-desc { color: rgba(255,255,255,0.65); font-size: 1.15rem; line-height: 1.9; margin-bottom: 20px; font-weight: 300; font-family: 'Noto Serif TC', serif; }
+    .journey-list { list-style: none; margin-bottom: 20px; }
+    .journey-list li { color: rgba(255,255,255,0.55); font-size: 1.1rem; padding: 7px 0 7px 18px; position: relative; border-bottom: 1px dashed rgba(255,255,255,0.07); font-weight: 300; }
+    .journey-list li::before { content: '▸'; position: absolute; left: 0; color: var(--gold); font-size: 0.95rem; top: 9px; }
+    .journey-point {
+      font-size: 1.13rem; color: var(--gold-light);
+      background: rgba(184,147,58,0.08);
+      border-left: 3px solid var(--gold);
+      padding: 12px 16px;
+      letter-spacing: 0.3px;
+      line-height: 1.7;
+    }
+
+    /* FOOTER */
+    footer { background: var(--navy-dark); border-top: 1px solid var(--gold); padding: 40px; text-align: center; }
+    .footer-logo { font-family: 'Playfair Display', serif; color: var(--gold-light); font-size: 1.65rem; letter-spacing: 3px; margin-bottom: 12px; }
+    .footer-copy { font-size: 1.03rem; color: rgba(255,255,255,0.3); letter-spacing: 1px; }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .section { padding: 70px 24px; }
+      .hero-title { font-size: 2.65rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="TARC_index.html" class="nav-logo">TARC</a>
+  <ul class="nav-links">
+    <li><a href="TARC_index.html#about">關於我們</a></li>
+    <li><a href="TARC_index.html#nav-cards">網站導覽</a></li>
+    <li><a href="team.html">團隊成員</a></li>
+    <li><a href="research.html">研究領域</a></li>
+    <li><a href="ATT_School.html" class="active">ATT School</a></li>
+    <li><a href="TARC_index.html#contact">聯絡我們</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-label">TARC · ATT School</div>
+    <h1 class="hero-title"><em>ATT School</em></h1>
+    <p class="hero-subtitle">14天一次的小旅行</p>
+    <div class="hero-divider"></div>
+    <div class="hero-tagline">攜手共聚．照護持續</div>
+  </div>
+  <div class="hero-scroll">SCROLL</div>
+</div>
+
+<!-- INTRO -->
+<section class="section" style="background: linear-gradient(180deg, var(--navy-dark) 0%, #141e30 100%);">
+  <div class="section-inner">
+    <div class="section-label">About ATT School</div>
+    <h2 class="section-title">拉開那扇門，<br>開始一段小旅程</h2>
+    <div class="section-line"></div>
+    <p class="intro-text">
+      ATT School 是針對 ATT 療法的病友陪伴計畫，Lecanemab 兩週一次的輸注頻率就像14天一次的小旅行。為阿茲海默症患者及家屬／照護者創造共同出遊的機會。
+    </p>
+    <p class="intro-text">
+      我們相信：藉由聚會的分享——在陪伴阿茲海默症孤獨的路途上，走向彼此理解、共同前行的群體力量。
+    </p>
+    <div class="intro-quote">
+      「拉開那扇門，開始14天的小旅程」<br>
+      每兩週，我們在這裡等你。
+    </div>
+  </div>
+</section>
+
+<!-- 18-MONTH JOURNEY -->
+<section class="section" style="background: #0c1828;">
+  <div class="section-inner">
+    <div class="section-label">ATT Therapy · 18 Months</div>
+    <h2 class="section-title" style="color:white;">ATT 療法：療程時長 18 個月</h2>
+    <div class="section-line"></div>
+    <p style="color:rgba(255,255,255,0.55); font-size:1.325rem; line-height:1.9; margin-bottom:56px; font-weight:300;">
+      在 ATT School 的陪伴下，走過三個階段的病友旅程。
+    </p>
+
+    <!-- Stage 1 -->
+    <div class="journey-stage">
+      <div class="journey-header">
+        <div class="journey-badge">初階</div>
+        <div class="journey-meta">
+          <div class="journey-title">治療初啟程</div>
+          <div class="journey-period">療程前段：約 0–6 個月</div>
+        </div>
+        <div class="journey-keyword">不急著到達，而是願意出發</div>
+      </div>
+      <div class="journey-body">
+        <p class="journey-desc">這個階段像是一趟「14 天一次的小旅行」。每一次療程、每一次回到醫院輸注治療，都不是為了立刻變好，而是慢慢停格在現在的位置。</p>
+        <ul class="journey-list">
+          <li>建立對 ATT 療法與療程節奏的基本理解</li>
+          <li>透過固定、規律的治療節奏，讓身心開始有安全感</li>
+          <li>在 ATT School 的陪伴下，學習停下來、覺察、感受</li>
+          <li>辨識身體訊號、情緒波動與生活慣性</li>
+          <li>即使還搞不清楚方向，也有人一起走、不必獨自承擔</li>
+        </ul>
+        <div class="journey-point">👉 這一階段的重點不是改變，而是「願意一次次出發」。</div>
+      </div>
+    </div>
+
+    <!-- Stage 2 -->
+    <div class="journey-stage">
+      <div class="journey-header">
+        <div class="journey-badge" style="background:var(--lavender);">進階</div>
+        <div class="journey-meta">
+          <div class="journey-title">做個有用的人</div>
+          <div class="journey-period">療程中段：約 7–12 個月</div>
+        </div>
+        <div class="journey-keyword">把療程帶進真實生活</div>
+      </div>
+      <div class="journey-body">
+        <p class="journey-desc">進入進階階段後，療程不再只發生在課室或諮詢中，而是開始改善生活、運動、飲食習慣。「有用」不是取悅他人，而是自己開始能派上用場。</p>
+        <ul class="journey-list">
+          <li>將 ATT 療程中的覺察與學習經驗，實際運用在日常中</li>
+          <li>練習在壓力、衝突、負面中，不再完全被舊模式帶走</li>
+          <li>面對反覆、退步與挫折，學習不否定自己</li>
+          <li>ATT School 陪伴病友／照護者調整期待，確認每一個微小但真實的改變</li>
+          <li>開始感受到：「我不是只能撐著，我可以承接一些事情」</li>
+        </ul>
+        <div class="journey-point">👉 這一階段的重點是「站回生活裡，用新的方式存在」。</div>
+      </div>
+    </div>
+
+    <!-- Stage 3 -->
+    <div class="journey-stage">
+      <div class="journey-header">
+        <div class="journey-badge" style="background:var(--gold); color:var(--navy-dark);">畢業生</div>
+        <div class="journey-meta">
+          <div class="journey-title">療程即將完成，開始新人生</div>
+          <div class="journey-period">療程後段：約 13–18 個月</div>
+        </div>
+        <div class="journey-keyword">不是結束，而是轉身往前</div>
+      </div>
+      <div class="journey-body">
+        <p class="journey-desc">來到畢業生階段，意味著 ATT 療程即將完成，但人生並沒有停止。不同的是——你已經不是原來那個沒有選擇的人。</p>
+        <ul class="journey-list">
+          <li>整合 18 個月療程中的身心改變與生命經驗</li>
+          <li>將 ATT 療程爭取到的時間，爭取更多時光來與家人共處</li>
+          <li>ATT School 陪伴整段歷程，走出未來新契機</li>
+          <li>為療程的結束，畫下一個安心、有力量的句點</li>
+        </ul>
+        <div class="journey-point">👉 這一階段的重點是「帶著療程成果，走進真正屬於自己的人生」。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section features">
+  <div class="section-inner">
+    <div class="section-label">課程特色</div>
+    <h2 class="section-title">每次相聚，都有意義</h2>
+    <div class="section-line"></div>
+    <div class="features-grid">
+      <div class="feature-item">
+        <span class="feature-icon">📅</span>
+        <div class="feature-title">每 14 天一次</div>
+        <div class="feature-desc">規律的節奏，讓病友及照護者有一個時段，找回相處的優質時光。</div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🧠</span>
+        <div class="feature-title">專業知識分享</div>
+        <div class="feature-desc">由 TARC 醫師團隊提供最新的 ATT 療法、照護技巧與認知訓練資訊。</div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🤝</span>
+        <div class="feature-title">照護者社群</div>
+        <div class="feature-desc">連結同樣走在照護路上的家屬，分享經驗、相互支持、共同成長。</div>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">💜</span>
+        <div class="feature-title">溫暖陪伴</div>
+        <div class="feature-desc">不只傳遞知識，更是一個可以說真心話、被理解、被接住的安全場域。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO -->
+<section class="section photo-section">
+  <div class="section-inner" style="text-align:center;">
+    <div class="section-label">活動紀錄</div>
+    <h2 class="section-title" style="text-align:center;">攜手共聚的現場</h2>
+    <div class="section-line" style="margin:0 auto 40px;"></div>
+    <div class="photo-frame">
+      <img src="圖片1.jpg" alt="ATT School 活動現場：攜手共聚，照護持續" id="eventPhoto">
+      <div class="photo-caption">ATT School 活動現場｜攜手共聚．照護持續</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CTA -->
+<section class="section" style="background: var(--navy); text-align:center;">
+  <div class="section-inner">
+    <div class="section-label" style="color:var(--gold-pale);">加入我們</div>
+    <h2 class="section-title" style="text-align:center;">一起踏上這段旅程</h2>
+    <div class="section-line" style="margin:0 auto 32px;"></div>
+    <p style="color:rgba(255,255,255,0.6); font-size:0.95rem; line-height:1.9; margin-bottom:40px; font-weight:300;">
+      如您是失智症患者家屬或照護者，歡迎聯繫我們，<br>了解下一次 ATT School 的活動資訊。
+    </p>
+    <a href="TARC_index.html#contact" style="display:inline-block; border:1px solid var(--gold); color:var(--gold-light); text-decoration:none; padding:14px 40px; font-size:0.88rem; letter-spacing:2px; transition:all 0.2s;">
+      聯絡 TARC →
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">TARC</div>
+  <p class="footer-copy">Taiwan ATT Research Consortium · ATT School</p>
+</footer>
+
+<script>
+  // Set hero bg image - try external file first, fallback handled by CSS
+  const heroBg = document.getElementById('heroBg');
+  heroBg.style.backgroundImage = "url('圖片1.jpg')";
+
+  // Parallax subtle effect
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    heroBg.style.transform = `scale(1.04) translateY(${y * 0.15}px)`;
+  });
+</script>
+</body>
+</html>
