@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>吳雅媛 醫師 — TARC</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+  :root {
+    --navy: #1a2e4a;
+    --navy-dark: #0f1d30;
+    --navy-mid: #2a4a6b;
+    --steel: #4a6d8c;
+    --gold: #b8933a;
+    --gold-light: #d4aa55;
+    --gold-pale: #f0d98a;
+    --white: #ffffff;
+    --grid-color: rgba(74, 109, 140, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--navy-dark);
+    background-image:
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 40px 40px;
+    color: rgba(255,255,255,0.55);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    background: rgba(10,18,28,0.94);
+    border-bottom: 2px solid var(--gold);
+    position: sticky; top: 0; z-index: 100;
+    padding: 0 40px;
+    backdrop-filter: blur(10px);
+  }
+  .nav-inner {
+    max-width: 900px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; height: 64px;
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; color: var(--gold-light); font-size: 1.75rem; letter-spacing: 3px; text-decoration: none; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 1.07rem; letter-spacing: 1px; font-weight: 500; transition: color 0.2s; position: relative; padding-bottom: 4px; }
+  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--gold-light); transition: width 0.25s; }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a.active { color: var(--gold-light); }
+  .nav-links a.active::after { width: 100%; }
+
+  /* PAGE */
+  .page-wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  /* BREADCRUMB */
+  .breadcrumb {
+    font-size: 0.97rem; color: rgba(255,255,255,0.22);
+    letter-spacing: 1px; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 7px;
+  }
+  .breadcrumb a { color: var(--gold); text-decoration: none; opacity: 0.8; transition: opacity 0.2s; }
+  .breadcrumb a:hover { opacity: 1; }
+  .breadcrumb-sep { opacity: 0.25; }
+
+  /* BACK BTN */
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.28); font-size: 1.0rem; letter-spacing: 1px;
+    text-decoration: none; background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1); padding: 7px 16px;
+    transition: all 0.2s; margin-bottom: 28px;
+  }
+  .back-btn:hover { color: var(--gold-light); border-color: rgba(184,147,58,0.4); background: rgba(184,147,58,0.05); }
+
+  /* CARD — mirrors .modal-box */
+  .profile-card {
+    background: var(--navy-dark);
+    border: 1px solid rgba(184,147,58,0.5);
+    animation: cardIn 0.28s ease both;
+  }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* mirrors .modal-top-bar */
+  .card-top-bar {
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-pale), transparent);
+  }
+
+  /* HEADER — mirrors .modal-header */
+  .card-header {
+    padding: 36px 40px 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    display: flex; align-items: flex-start; gap: 24px;
+    position: relative; overflow: hidden;
+  }
+  .card-header::after {
+    content: '吳';
+    position: absolute; right: 24px; bottom: -20px;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 8.25rem; font-weight: 700;
+    color: rgba(184,147,58,0.05);
+    line-height: 1; pointer-events: none; user-select: none;
+  }
+
+  /* mirrors .modal-avatar */
+  .card-avatar {
+    width: 80px; height: 80px;
+    background: var(--navy-mid);
+    border: 2px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 2.45rem; color: var(--gold-light); font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .card-meta { flex: 1; padding-top: 4px; }
+
+  .card-label {
+    font-size: 0.87rem; letter-spacing: 5px; color: var(--gold);
+    font-weight: 700; text-transform: uppercase; margin-bottom: 8px;
+  }
+
+  /* mirrors .modal-name */
+  .card-name {
+    font-family: 'Noto Serif TC', serif; color: var(--white);
+    font-size: 2.05rem; font-weight: 700; margin-bottom: 3px; line-height: 1.2;
+  }
+
+  /* mirrors .modal-name-en */
+  .card-name-en {
+    color: rgba(255,255,255,0.3); font-size: 1.05rem;
+    letter-spacing: 2px; font-weight: 300; margin-bottom: 8px;
+  }
+
+  /* mirrors .modal-hospital */
+  .card-hospital { color: var(--gold-pale); font-size: 1.13rem; margin-bottom: 4px; }
+
+  /* mirrors .modal-spec */
+  .card-spec { color: rgba(255,255,255,0.32); font-size: 1.03rem; font-weight: 300; }
+
+  /* mirrors .modal-city-tag */
+  .card-city-tag {
+    display: inline-flex; align-items: center; gap: 5px;
+    border: 1px solid rgba(184,147,58,0.3);
+    color: var(--gold-pale); font-size: 0.98rem;
+    padding: 4px 12px; margin-top: 10px; letter-spacing: 1px;
+  }
+
+  /* BODY — mirrors .modal-body */
+  .card-body { padding: 28px 40px 40px; }
+
+  /* mirrors .modal-section-label */
+  .section-label {
+    font-size: 0.9rem; letter-spacing: 4px; color: var(--gold);
+    font-weight: 700; text-transform: uppercase;
+    margin-bottom: 10px; margin-top: 28px;
+  }
+  .section-label:first-child { margin-top: 0; }
+
+  .section-div { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 24px 0 0; }
+
+  /* mirrors .modal-list */
+  .profile-list { list-style: none; padding: 0; }
+  .profile-list li {
+    color: rgba(255,255,255,0.55); font-size: 1.1rem; line-height: 1.7;
+    font-weight: 300; padding: 5px 0 5px 14px; position: relative;
+    border-bottom: 1px dashed rgba(255,255,255,0.06);
+  }
+  .profile-list li:last-child { border-bottom: none; }
+  .profile-list li::before { content: '▸'; position: absolute; left: 0; color: var(--gold); font-size: 0.9rem; top: 8px; }
+
+  /* mirrors .modal-expertise-list / .modal-expertise-tag */
+  .expertise-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .expertise-tag {
+    font-size: 1.0rem; color: var(--gold-pale);
+    border: 1px solid rgba(184,147,58,0.3);
+    background: rgba(184,147,58,0.06);
+    padding: 5px 14px; letter-spacing: 0.5px;
+  }
+
+  /* PUBLICATIONS */
+  .pub-bar {
+    height: 3px;
+    background: linear-gradient(90deg, var(--steel), rgba(74,109,140,0.15), transparent);
+    margin: 0 -40px 24px;
+  }
+
+  .pub-item { padding: 18px 0; border-bottom: 1px dashed rgba(255,255,255,0.07); }
+  .pub-item:last-child { border-bottom: none; }
+
+  .pub-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.93rem; color: rgba(184,147,58,0.55);
+    letter-spacing: 2px; margin-bottom: 5px;
+  }
+
+  .pub-title {
+    color: rgba(255,255,255,0.85); font-size: 1.13rem;
+    line-height: 1.65; font-weight: 400; margin-bottom: 6px;
+    font-family: 'Noto Serif TC', serif;
+  }
+
+  .pub-meta { color: rgba(255,255,255,0.3); font-size: 1.0rem; font-weight: 300; line-height: 1.5; }
+
+  .pub-link {
+    display: inline-flex; align-items: center; gap: 4px;
+    margin-top: 8px; font-size: 0.97rem; color: var(--gold);
+    text-decoration: none; letter-spacing: 1px;
+    border-bottom: 1px solid rgba(184,147,58,0.3); padding-bottom: 1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .pub-link:hover { color: var(--gold-light); border-color: var(--gold-light); }
+
+  /* FOOTER */
+  footer { background: rgba(8,14,24,0.95); border-top: 1px solid var(--gold); padding: 40px; text-align: center; }
+  .footer-logo { font-family: 'Playfair Display', serif; color: var(--gold-light); font-size: 2.05rem; letter-spacing: 4px; margin-bottom: 8px; }
+  .footer-name { color: rgba(255,255,255,0.3); font-size: 1.03rem; letter-spacing: 2px; margin-bottom: 24px; font-weight: 300; }
+  .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 24px; flex-wrap: wrap; }
+  .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 1.05rem; letter-spacing: 1px; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold-light); }
+  .footer-copy { color: rgba(255,255,255,0.15); font-size: 0.97rem; letter-spacing: 1px; }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .page-wrap { padding: 28px 16px 60px; }
+    .card-header { padding: 28px 24px 22px; gap: 18px; }
+    .card-header::after { display: none; }
+    .card-avatar { width: 64px; height: 64px; font-size: 1.95rem; }
+    .card-name { font-size: 1.7rem; }
+    .card-body { padding: 22px 24px 32px; }
+    .pub-bar { margin: 0 -24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="TARC_index.html" class="nav-logo">TARC</a>
+    <ul class="nav-links">
+      <li><a href="TARC_index.html#about">關於我們</a></li>
+      <li><a href="TARC_index.html#nav-cards">網站導覽</a></li>
+      <li><a href="team.html" class="active">團隊成員</a></li>
+      <li><a href="research.html">研究領域</a></li>
+      <li><a href="ATT_School.html">ATT School</a></li>
+      <li><a href="TARC_index.html#contact">聯絡我們</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-wrap">
+
+  <div class="breadcrumb">
+    <a href="TARC_index.html">首頁</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="team.html">團隊成員</a>
+    <span class="breadcrumb-sep">/</span>
+    <span>吳雅媛 醫師</span>
+  </div>
+
+  <a href="team.html" class="back-btn">← 返回團隊成員</a>
+
+  <div class="profile-card">
+    <div class="card-top-bar"></div>
+
+    <!-- HEADER -->
+    <div class="card-header">
+      <div class="card-avatar" style="padding:0;overflow:hidden;"><img src="data:image/jpeg;base64,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" alt="吳雅媛 醫師" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div>
+      <div class="card-meta">
+        <div class="card-label">Member Profile · TARC</div>
+        <div class="card-name">吳雅媛 醫師</div>
+        <div class="card-name-en">Yah-Yuan Wu, M.D.</div>
+        <div class="card-hospital">林口長庚紀念醫院</div>
+        <div class="card-spec">神經科 · 失智症專科</div>
+        <div class="card-city-tag">📍 桃園</div>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="card-body">
+
+      <!-- 現職 -->
+      <div class="section-label">現職</div>
+      <ul class="profile-list">
+        <li>林口長庚 失智症科暨桃園長庚失智症中心主治醫師</li>
+      </ul>
+
+      <!-- 經歷 -->
+      <hr class="section-div">
+      <div class="section-label">經歷</div>
+      <ul class="profile-list">
+        <li>新北市立土城醫院神經內科主治醫師</li>
+        <li>林口長庚紀念醫院神經內科部住院醫師</li>
+        <li>林口長庚紀念醫院不分科住院醫師</li>
+        <li>台北榮民總醫院實習醫學生</li>
+      </ul>
+
+      <!-- 學歷 -->
+      <hr class="section-div">
+      <div class="section-label">學歷</div>
+      <ul class="profile-list">
+        <li>臺北醫學大學醫學系 學士</li>
+      </ul>
+
+      <!-- 研究專長 -->
+      <hr class="section-div">
+      <div class="section-label">專長</div>
+      <div class="expertise-list">
+        <span class="expertise-tag">失智症及退化性腦部疾病</span>
+        <span class="expertise-tag">認知功能障礙</span>
+        <span class="expertise-tag">腦中風</span>
+        <span class="expertise-tag">血管性失智症</span>
+        <span class="expertise-tag">一般神經疾病</span>
+      </div>
+
+      <!-- 研究著作 -->
+      <hr class="section-div">
+      <div class="section-label">研究著作 · 1 篇</div>
+      <div class="pub-bar"></div>
+
+      <div class="pub-item">
+        <div class="pub-num">01</div>
+        <div class="pub-title">Memory complaint is a surrogate for memory decline in the middle-aged: A register-based study</div>
+        <div class="pub-meta"><em>J. Clin. Med.</em> · 2019</div>
+        <a class="pub-link" href="https://doi.org/10.3390/jcm8111900" target="_blank" rel="noopener">DOI ↗</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">TARC</div>
+  <div class="footer-name">TAIWAN ATT RESEARCH CONSORTIUM</div>
+  <div class="footer-links">
+    <a href="TARC_index.html#about">關於我們</a>
+    <a href="TARC_index.html#nav-cards">網站導覽</a>
+    <a href="team.html">團隊成員</a>
+    <a href="research.html">研究領域</a>
+    <a href="TARC_index.html#contact">聯絡我們</a>
+  </div>
+  <div class="footer-copy">© 2025 Taiwan ATT Research Consortium. All rights reserved.</div>
+</footer>
+
+</body>
+</html>

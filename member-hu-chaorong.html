@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>胡朝榮 醫師 — TARC</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+  :root {
+    --navy-dark:#0f1d30; --navy-mid:#2a4a6b; --steel:#4a6d8c;
+    --gold:#b8933a; --gold-light:#d4aa55; --gold-pale:#f0d98a;
+    --white:#ffffff; --grid-color:rgba(74,109,140,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Noto Sans TC',sans-serif;background:var(--navy-dark);background-image:linear-gradient(var(--grid-color) 1px,transparent 1px),linear-gradient(90deg,var(--grid-color) 1px,transparent 1px);background-size:40px 40px;color:rgba(255,255,255,0.55);min-height:100vh;overflow-x:hidden;}
+  nav{background:rgba(10,18,28,0.94);border-bottom:2px solid var(--gold);position:sticky;top:0;z-index:100;padding:0 40px;backdrop-filter:blur(10px);}
+  .nav-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;}
+  .nav-logo{font-family:'Playfair Display',serif;color:var(--gold-light);font-size:1.75rem;letter-spacing:3px;text-decoration:none;}
+  .nav-links{display:flex;gap:32px;list-style:none;}
+  .nav-links a{color:rgba(255,255,255,0.6);text-decoration:none;font-size:1.07rem;letter-spacing:1px;font-weight:500;transition:color 0.2s;position:relative;padding-bottom:4px;}
+  .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold-light);transition:width 0.25s;}
+  .nav-links a:hover,.nav-links a.active{color:var(--gold-light);}
+  .nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+  .page-wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px;}
+  .breadcrumb{font-size:0.97rem;color:rgba(255,255,255,0.22);letter-spacing:1px;margin-bottom:20px;display:flex;align-items:center;gap:7px;}
+  .breadcrumb a{color:var(--gold);text-decoration:none;opacity:0.8;transition:opacity 0.2s;}
+  .breadcrumb a:hover{opacity:1;}
+  .breadcrumb-sep{opacity:0.25;}
+  .back-btn{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,0.28);font-size:1.0rem;letter-spacing:1px;text-decoration:none;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);padding:7px 16px;transition:all 0.2s;margin-bottom:28px;}
+  .back-btn:hover{color:var(--gold-light);border-color:rgba(184,147,58,0.4);background:rgba(184,147,58,0.05);}
+  .profile-card{background:var(--navy-dark);border:1px solid rgba(184,147,58,0.5);animation:cardIn 0.28s ease both;}
+  @keyframes cardIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+  .card-top-bar{height:4px;background:linear-gradient(90deg,var(--gold),var(--gold-pale),transparent);}
+  .card-header{padding:36px 40px 28px;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:flex-start;gap:24px;position:relative;overflow:hidden;}
+  .card-avatar{width:88px;height:88px;border:2px solid var(--gold);flex-shrink:0;overflow:hidden;background:var(--navy-mid);}
+  .card-avatar img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;image-rendering:auto;}
+  .card-meta{flex:1;padding-top:4px;}
+  .card-label{font-size:0.87rem;letter-spacing:5px;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:8px;}
+  .card-name{font-family:'Noto Serif TC',serif;color:var(--white);font-size:2.05rem;font-weight:700;margin-bottom:3px;line-height:1.2;}
+  .card-hospital{color:var(--gold-pale);font-size:1.13rem;margin-bottom:4px;}
+  .card-spec{color:rgba(255,255,255,0.32);font-size:1.03rem;font-weight:300;}
+  .card-city-tag{display:inline-flex;align-items:center;gap:5px;border:1px solid rgba(184,147,58,0.3);color:var(--gold-pale);font-size:0.98rem;padding:4px 12px;margin-top:10px;letter-spacing:1px;}
+  .card-body{padding:28px 40px 40px;}
+  .section-label{font-size:0.9rem;letter-spacing:4px;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:10px;margin-top:28px;}
+  .section-label:first-child{margin-top:0;}
+  .section-div{border:none;border-top:1px solid rgba(255,255,255,0.06);margin:24px 0 0;}
+  .about-text{color:rgba(255,255,255,0.55);font-size:1.12rem;line-height:1.9;font-weight:300;}
+  .expertise-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
+  .expertise-tag{font-size:1.0rem;color:var(--gold-pale);border:1px solid rgba(184,147,58,0.3);background:rgba(184,147,58,0.06);padding:5px 14px;letter-spacing:0.5px;}
+  .pub-bar{height:3px;background:linear-gradient(90deg,var(--steel),rgba(74,109,140,0.15),transparent);margin:0 -40px 24px;}
+  .pub-empty{text-align:center;padding:48px 0;color:rgba(255,255,255,0.22);font-size:1.1rem;font-weight:300;line-height:2.2;}
+  .pub-empty-icon{font-size:2.25rem;display:block;margin-bottom:12px;opacity:0.3;}
+  footer{background:rgba(8,14,24,0.95);border-top:1px solid var(--gold);padding:40px;text-align:center;}
+  .footer-logo{font-family:'Playfair Display',serif;color:var(--gold-light);font-size:2.05rem;letter-spacing:4px;margin-bottom:8px;}
+  .footer-name{color:rgba(255,255,255,0.3);font-size:1.03rem;letter-spacing:2px;margin-bottom:24px;font-weight:300;}
+  .footer-links{display:flex;justify-content:center;gap:32px;margin-bottom:24px;flex-wrap:wrap;}
+  .footer-links a{color:rgba(255,255,255,0.4);text-decoration:none;font-size:1.05rem;letter-spacing:1px;transition:color 0.2s;}
+  .footer-links a:hover{color:var(--gold-light);}
+  .footer-copy{color:rgba(255,255,255,0.15);font-size:0.97rem;letter-spacing:1px;}
+  @media(max-width:600px){
+    nav{padding:0 20px;} .nav-links{display:none;}
+    .page-wrap{padding:28px 16px 60px;}
+    .card-header{padding:28px 24px 22px;gap:18px;}
+    .card-avatar{width:68px;height:68px;}
+    .card-name{font-size:1.7rem;}
+    .card-body{padding:22px 24px 32px;}
+    .pub-bar{margin:0 -24px 20px;}
+  }
+
+  .pub-bar{height:3px;background:linear-gradient(90deg,var(--steel),rgba(74,109,140,0.15),transparent);margin:0 -40px 24px;}
+  .pub-item{padding:16px 0;border-bottom:1px dashed rgba(255,255,255,0.07);}
+  .pub-item:last-child{border-bottom:none;}
+  .pub-num{font-family:'Playfair Display',serif;font-size:0.93rem;color:rgba(184,147,58,0.55);letter-spacing:2px;margin-bottom:4px;}
+  .pub-authors{color:rgba(255,255,255,0.3);font-size:0.875rem;line-height:1.55;font-weight:300;margin-bottom:4px;}
+  .pub-authors strong{color:var(--gold-pale);font-weight:500;}
+  .pub-title{color:rgba(255,255,255,0.82);font-size:1.12rem;line-height:1.6;font-weight:400;margin-bottom:5px;font-family:'Noto Serif TC',serif;}
+  .pub-meta{color:rgba(255,255,255,0.28);font-size:0.98rem;font-weight:300;}
+  .pub-note{margin-top:20px;padding:12px 16px;background:rgba(74,109,140,0.08);border-left:2px solid rgba(184,147,58,0.3);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="TARC_index.html" class="nav-logo">TARC</a>
+    <ul class="nav-links">
+      <li><a href="TARC_index.html#about">關於我們</a></li>
+      <li><a href="TARC_index.html#nav-cards">網站導覽</a></li>
+      <li><a href="team.html" class="active">團隊成員</a></li>
+      <li><a href="research.html">研究領域</a></li>
+      <li><a href="ATT_School.html">ATT School</a></li>
+      <li><a href="TARC_index.html#contact">聯絡我們</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="breadcrumb">
+    <a href="TARC_index.html">首頁</a><span class="breadcrumb-sep">/</span>
+    <a href="team.html">團隊成員</a><span class="breadcrumb-sep">/</span>
+    <span>胡朝榮 醫師</span>
+  </div>
+  <a href="team.html" class="back-btn">← 返回團隊成員</a>
+
+  <div class="profile-card">
+    <div class="card-top-bar"></div>
+
+    <div class="card-header">
+      <div class="card-avatar">
+        <img src="data:image/jpeg;base64,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" alt="胡朝榮 醫師">
+      </div>
+      <div class="card-meta">
+        <div class="card-label">Member Profile · TARC</div>
+        <div class="card-name">胡朝榮 醫師</div>
+        <div class="card-hospital">雙和醫院</div>
+        <div class="card-spec">神經科 · 失智症專科</div>
+        <div class="card-city-tag">📍 新北</div>
+      </div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="section-label">現職</div>
+      <ul class="profile-list">
+        <li>臺北醫學大學醫學院醫學系神經學科 教授兼院長</li>
+        <li>臺北醫學大學部立雙和醫院 顧問醫師</li>
+        <li>台灣臨床失智症學會 監事</li>
+        <li>美國心臟學會腦中風院士（FAHA）</li>
+        <li>亞洲血管性失智症學會（VasCog Asia）理事長</li>
+        <li>臺灣腦中風病友協會 監事</li>
+      </ul>
+
+      <hr class="section-div">
+      <div class="section-label">學歷</div>
+      <ul class="profile-list">
+        <li>臺北醫學大學醫學院醫學系 醫學士</li>
+      </ul>
+
+      <hr class="section-div">
+      <div class="section-label">經歷</div>
+      <ul class="profile-list">
+        <li>臺北市立聯合醫院仁愛院區 神經科住院醫師／主治醫師</li>
+        <li>美國聖路易華盛頓大學 進修</li>
+        <li>臺北醫學大學附設醫院 神經科主治醫師</li>
+        <li>臺北醫學大學部立雙和醫院 研究副院長</li>
+        <li>臺北醫學大學臺北神經醫學中心 副院長</li>
+        <li>臺北醫學大學部立雙和醫院 失智症中心主任</li>
+        <li>臺北醫學大學醫學院 副院長</li>
+        <li>臺灣神經學學會 會員理事長、常務監事</li>
+        <li>臺灣臨床失智症學會 理事長</li>
+        <li>臺灣腦中風醫學會 監事</li>
+        <li>臺灣腦中風病友協會 理事長</li>
+      </ul>
+
+      <hr class="section-div">
+      <div class="section-label">專長</div>
+      <div class="expertise-list">
+        <span class="expertise-tag">失智症</span>
+        <span class="expertise-tag">分子神經學</span>
+        <span class="expertise-tag">腦中風</span>
+      </div>
+
+      <hr class="section-div">
+      <div class="section-label">近五年研究著作</div>
+      <div class="pub-bar"></div>
+
+      <div class="pub-item">
+        <div class="pub-num">01</div>
+        <div class="pub-authors">Shu-Ping Chao, Wei-Che Lin, Cheng-Hsien Lu, Hsiu-Chuan Wu, Hsing-Cheng Liu, <strong>Chaur-Jong Hu</strong></div>
+        <div class="pub-title">Changes in plasma biomarkers differentiate clinical stages of Alzheimer's disease using immunomagnetic reduction assays.</div>
+        <div class="pub-meta"><em>Journal of Alzheimer's Disease.</em> · 2024 · doi: 10.3233/JAD-240690</div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">02</div>
+        <div class="pub-authors">Po-Hao Wang, Ho-Wei Lin, Truc Tran Thanh Nguyen, …, <strong>Chaur-Jong Hu</strong>, Li-Kai Huang, Ka-Wai Tam, Yi-Chun Kuan</div>
+        <div class="pub-title">Efficacy of Aromatherapy Against Behavioral and Psychological Disturbances in People With Dementia: A Meta-Analysis of Randomized Controlled Trials.</div>
+        <div class="pub-meta"><em>Journal of the American Medical Directors Association.</em> · 2024 · doi: 10.1016/j.jamda.2024.105199</div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">03</div>
+        <div class="pub-authors">Nagaendran Kandiah, Seong Hye Choi, <strong>Chaur-Jong Hu</strong>, Kenji Ishii, Kensaku Kasuga, Vincent C.T. Mok</div>
+        <div class="pub-title">Current and Future Trends in Biomarkers for the Early Detection of Alzheimer's Disease in Asia: Expert Opinion.</div>
+        <div class="pub-meta"><em>Alzheimer's &amp; Dementia: Diagnosis, Assessment &amp; Disease Monitoring.</em> · 2022 · doi: 10.3233/ADR-220059</div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">04</div>
+        <div class="pub-authors"><strong>Chaur-Jong Hu</strong>, et al.</div>
+        <div class="pub-title">Clinical Trials of New Drugs for Vascular Cognitive Impairment and Vascular Dementia.</div>
+        <div class="pub-meta"><em>Int. J. Mol. Sci.</em> · 2022 · 23(19):11067 · doi: 10.3390/ijms231911067</div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">05</div>
+        <div class="pub-authors">Shu-Wei Yeh, Li-Fong Lin, Hung-Chou Chen, Li-Kai Huang, <strong>Chaur-Jong Hu</strong>, Ka-Wai Tam, Yi-Chun Kuan, Chien-Hsiung Hong</div>
+        <div class="pub-title">High-intensity functional exercise in older adults with dementia: A systematic review and meta-analysis.</div>
+        <div class="pub-meta"><em>Clinical Rehabilitation.</em> · 2021 · doi: 10.1177/0269215520961637</div>
+      </div>
+
+      <div class="pub-note">
+        <span style="font-size:0.875rem;color:rgba(255,255,255,0.3);font-weight:300;">
+          ※ 以上為近五年代表著作（經網路公開資料核實），完整著作列表請洽作者或參閱 PubMed。
+        </span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">TARC</div>
+  <div class="footer-name">TAIWAN ATT RESEARCH CONSORTIUM</div>
+  <div class="footer-links">
+    <a href="TARC_index.html#about">關於我們</a>
+    <a href="TARC_index.html#nav-cards">網站導覽</a>
+    <a href="team.html">團隊成員</a>
+    <a href="research.html">研究領域</a>
+    <a href="TARC_index.html#contact">聯絡我們</a>
+  </div>
+  <div class="footer-copy">© 2025 Taiwan ATT Research Consortium. All rights reserved.</div>
+</footer>
+</body>
+</html>
