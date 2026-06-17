@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TARC - Taiwan ATT Research Consortium</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap');
+
+  :root {
+    --navy: #1a2e4a;
+    --navy-dark: #0f1d30;
+    --navy-mid: #2a4a6b;
+    --steel: #4a6d8c;
+    --gold: #b8933a;
+    --gold-light: #d4aa55;
+    --gold-pale: #f0d98a;
+    --cream: #f5f2eb;
+    --white: #ffffff;
+    --grid-color: rgba(74, 109, 140, 0.15);
+    --border: rgba(184, 147, 58, 0.4);
+    --text-dark: #1a2e4a;
+    --text-mid: #3a5570;
+    --text-light: #6a8aaa;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background-color: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* Grid background */
+  .grid-bg {
+    background-image:
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    background: var(--navy-dark);
+    border-bottom: 2px solid var(--gold);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 0 40px;
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold-light);
+    font-size: 1.75rem;
+    letter-spacing: 3px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+    transition: color 0.2s;
+    position: relative;
+    padding-bottom: 4px;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold-light);
+    transition: width 0.25s;
+  }
+
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--navy-dark);
+    background-image:
+      linear-gradient(rgba(26,46,74,0.97), rgba(15,29,48,0.98)),
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: cover, 40px 40px, 40px 40px;
+    padding: 100px 40px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(ellipse, rgba(184,147,58,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    font-size: 1.0rem;
+    letter-spacing: 3px;
+    padding: 6px 18px;
+    margin-bottom: 28px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 300;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.45rem, 5vw, 4.05rem);
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+  }
+
+  .hero-subtitle {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(1.25rem, 2vw, 1.55rem);
+    color: var(--gold-pale);
+    margin-bottom: 8px;
+    font-weight: 400;
+    letter-spacing: 4px;
+  }
+
+  .hero-subtitle-en {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    font-weight: 300;
+  }
+
+  .hero-desc {
+    color: rgba(255,255,255,0.6);
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 48px;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy-dark);
+    padding: 12px 32px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .btn-outline {
+    border: 1px solid rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.85);
+    padding: 12px 32px;
+    font-size: 1.15rem;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold-light); }
+
+  /* ===== SECTION WRAPPER ===== */
+  .section {
+    padding: 80px 40px;
+  }
+
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.97rem;
+    letter-spacing: 4px;
+    color: var(--gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: clamp(1.85rem, 3vw, 2.65rem);
+    color: var(--navy);
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+
+  .section-line {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin-bottom: 48px;
+  }
+
+  /* Blueprint card style */
+  .blueprint-card {
+    background: white;
+    border: 1px solid rgba(74,109,140,0.25);
+    outline: 3px solid white;
+    outline-offset: -6px;
+    position: relative;
+    box-shadow: 4px 4px 0 rgba(74,109,140,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .blueprint-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 6px 8px 0 rgba(74,109,140,0.15);
+  }
+
+  .blueprint-card::before {
+    content: '';
+    position: absolute;
+    top: 6px; left: 6px; right: -6px; bottom: -6px;
+    border: 1px solid rgba(184,147,58,0.2);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* ===== ABOUT ===== */
+  .about-section {
+    background: var(--cream);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .about-text p {
+    color: var(--text-mid);
+    line-height: 1.9;
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .stat-box {
+    padding: 24px 20px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.65rem;
+    color: var(--navy);
+    display: block;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 1.05rem;
+    color: var(--steel);
+    letter-spacing: 1.5px;
+    font-weight: 500;
+  }
+
+  .stat-gold .stat-num { color: var(--gold); }
+
+  /* ===== NAV CARDS ===== */
+  .nav-cards {
+    background: var(--navy);
+    background-image:
+      linear-gradient(rgba(26,46,74,0.95), rgba(15,29,48,0.95)),
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: cover, 40px 40px, 40px 40px;
+  }
+
+  .nav-cards .section-title { color: white; }
+  .nav-cards .section-label { color: var(--gold-pale); }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .nav-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(184,147,58,0.3);
+    padding: 36px 28px;
+    cursor: pointer;
+    transition: background 0.25s, border-color 0.25s, transform 0.2s;
+    text-decoration: none;
+    display: block;
+  }
+
+  .nav-card:hover {
+    background: rgba(184,147,58,0.1);
+    border-color: var(--gold);
+    transform: translateY(-4px);
+  }
+
+  .nav-card-icon {
+    font-size: 2.25rem;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .nav-card h3 {
+    font-family: 'Noto Serif TC', serif;
+    color: var(--white);
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .nav-card p {
+    color: rgba(255,255,255,0.55);
+    font-size: 1.07rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .nav-card-more {
+    display: inline-block;
+    margin-top: 16px;
+    color: var(--gold-light);
+    font-size: 1.03rem;
+    letter-spacing: 1.5px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--navy-dark);
+    border-top: 1px solid var(--gold);
+    padding: 40px;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold-light);
+    font-size: 2.05rem;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+  }
+
+  .footer-name {
+    color: rgba(255,255,255,0.4);
+    font-size: 1.03rem;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--gold-light); }
+
+  .footer-copy {
+    color: rgba(255,255,255,0.2);
+    font-size: 0.97rem;
+    letter-spacing: 1px;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero > * { animation: fadeUp 0.7s ease both; }
+  .hero-badge { animation-delay: 0.1s; }
+  .hero h1 { animation-delay: 0.2s; }
+  .hero-subtitle { animation-delay: 0.3s; }
+  .hero-subtitle-en { animation-delay: 0.35s; }
+  .hero-desc { animation-delay: 0.4s; }
+  .hero-ctas { animation-delay: 0.5s; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .cards-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .about-stats { grid-template-columns: 1fr 1fr; }
+    .section { padding: 60px 20px; }
+    nav { padding: 0 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">TARC</div>
+    <ul class="nav-links">
+      <li><a href="#about">關於我們</a></li>
+      <li><a href="#nav-cards">網站導覽</a></li>
+      <li><a href="team.html">團隊成員</a></li>
+      <li><a href="research.html">研究領域</a></li>
+      <li><a href="ATT_School.html">ATT School</a></li>
+      <li><a href="#contact">聯絡我們</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero grid-bg">
+  <div class="hero-badge">TAIWAN ATT RESEARCH CONSORTIUM</div>
+  <h1>TARC</h1>
+  <div class="hero-subtitle">台灣 ATT 研究聯盟</div>
+  <div class="hero-subtitle-en">ATT · Amyloid Targeting Therapy</div>
+  <p class="hero-desc">
+    致力於失智症治療與類澱粉蛋白靶向療法研究，<br>
+    整合生物標記、影像診斷與臨床研究，推動台灣失智症醫療發展。
+  </p>
+  <div class="hero-ctas">
+    <a href="research.html" class="btn-primary">探索研究領域</a>
+    <a href="team.html" class="btn-outline">認識團隊成員</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section about-section grid-bg">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-label">About TARC</div>
+        <h2 class="section-title">關於我們</h2>
+        <div class="section-line"></div>
+        <p>
+          Taiwan ATT Research Consortium（TARC）是由台灣頂尖神經科學與失智症專科醫師所組成的跨機構研究聯盟，ATT 代表 Amyloid Target Therapy（類澱粉蛋白靶向療法），聚焦於阿茲海默症及其他失智症的生物標記研究與臨床轉譯。
+        </p>
+        <p>
+          我們以類澱粉蛋白（Amyloid）靶向療法為核心研究主軸，整合正子攝影（PET）、磁振造影（MRI）、Centiloid 數值判讀等先進影像診斷技術，結合神經心理學評估與血液生物標記，建立完整的失智症研究平台。
+        </p>
+        <p>
+          TARC 秉持「兼顧專業深度與大眾可讀性」的核心準則，致力將前沿研究轉譯為臨床實踐，惠及患者與家屬。
+        </p>
+      </div>
+      <div class="about-stats" style="grid-template-columns: 1fr 1fr; grid-template-rows: auto;">
+        <div class="blueprint-card stat-box">
+          <span class="stat-num">10</span>
+          <span class="stat-label">創始核心成員</span>
+        </div>
+        <div class="blueprint-card stat-box stat-gold">
+          <span class="stat-num">5+</span>
+          <span class="stat-label">合作醫療機構</span>
+        </div>
+        <div class="blueprint-card stat-box stat-gold">
+          <span class="stat-num" style="font-size: 1.55rem;">ATT</span>
+          <span class="stat-label">類澱粉蛋白靶向療法</span>
+        </div>
+        <div class="blueprint-card stat-box">
+          <span class="stat-num">PET</span>
+          <span class="stat-label">正子攝影診斷</span>
+        </div>
+        <div class="blueprint-card stat-box stat-gold">
+          <span class="stat-num" style="font-size: 1.55rem;">CL</span>
+          <span class="stat-label">Centiloid 數值判讀</span>
+        </div>
+        <div class="blueprint-card stat-box">
+          <span class="stat-num">MRI</span>
+          <span class="stat-label">磁振造影研究</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NAVIGATION CARDS -->
+<section class="section nav-cards grid-bg" id="nav-cards">
+  <div class="section-inner">
+    <div class="section-label">網站導覽</div>
+    <h2 class="section-title">探索 TARC</h2>
+    <div class="section-line"></div>
+    <div class="cards-grid">
+      <a href="team.html" class="nav-card">
+        <span class="nav-card-icon">👥</span>
+        <h3>團隊成員</h3>
+        <p>認識來自全國各地頂尖醫療機構的專業醫師群。</p>
+        <span class="nav-card-more">認識團隊 →</span>
+      </a>
+      <a href="research.html" class="nav-card">
+        <span class="nav-card-icon">🔬</span>
+        <h3>研究領域</h3>
+        <p>研究方向、疾病領域與診斷技術，涵蓋 Amyloid 靶向療法、PET 影像診斷與生物標記研究。</p>
+        <span class="nav-card-more">探索研究 →</span>
+      </a>
+      <a href="ATT_School.html" class="nav-card">
+        <span class="nav-card-icon">🏫</span>
+        <h3>ATT School</h3>
+        <p>14天一次的小旅行——為失智症患者家屬與照護者設計的陪伴課程，攜手共聚，照護持續。</p>
+        <span class="nav-card-more">了解更多 →</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section" style="background:var(--navy); background-image: linear-gradient(rgba(26,46,74,0.97), rgba(15,29,48,0.98)), linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: cover, 40px 40px, 40px 40px;">
+  <div class="section-inner" style="text-align:center;">
+    <div class="section-label" style="color:var(--gold-pale);">Contact Us</div>
+    <h2 class="section-title" style="color:white;">聯絡我們</h2>
+    <div class="section-line" style="margin:0 auto 40px;"></div>
+    <p style="color:rgba(255,255,255,0.6); font-size: 1.2rem; margin-bottom:40px; font-weight:300; line-height:1.8;">
+      如有學術合作、媒體採訪或研究諮詢需求，<br>歡迎透過以下方式與 TARC 聯絡。
+    </p>
+    <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
+      <div class="blueprint-card" style="padding:28px 36px; background:rgba(255,255,255,0.04); border-color:rgba(184,147,58,0.3);">
+        <div style="color:var(--gold-light); font-size: 1.75rem; margin-bottom:10px;">✉</div>
+        <div style="color:rgba(255,255,255,0.5); font-size: 1.03rem; letter-spacing:2px; margin-bottom:6px;">EMAIL</div>
+        <div style="color:white; font-size: 1.15rem;">tarc@research.org.tw</div>
+      </div>
+      <div class="blueprint-card" style="padding:28px 36px; background:rgba(255,255,255,0.04); border-color:rgba(184,147,58,0.3);">
+        <div style="color:var(--gold-light); font-size: 1.75rem; margin-bottom:10px;">📍</div>
+        <div style="color:rgba(255,255,255,0.5); font-size: 1.03rem; letter-spacing:2px; margin-bottom:6px;">LOCATION</div>
+        <div style="color:white; font-size: 1.15rem;">台灣</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">TARC</div>
+  <div class="footer-name">TAIWAN ATT RESEARCH CONSORTIUM</div>
+  <div class="footer-links">
+    <a href="#about">關於我們</a>
+    <a href="#nav-cards">網站導覽</a>
+    <a href="team.html">團隊成員</a>
+    <a href="research.html">研究領域</a>
+    <a href="#contact">聯絡我們</a>
+  </div>
+  <div class="footer-copy">© 2025 Taiwan ATT Research Consortium. All rights reserved.</div>
+</footer>
+
+<script>
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.blueprint-card, .nav-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
