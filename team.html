@@ -189,6 +189,8 @@
     overflow: hidden;
     user-select: none;
     -webkit-user-select: none;
+    display: flex;
+    flex-direction: column;
   }
   .member-card::before {
     content: '';
@@ -277,11 +279,11 @@
 
   /* ===== PUBLICATIONS BUTTON on card ===== */
   .member-card-footer {
-    margin-top: 16px;
+    margin-top: auto;
     padding-top: 14px;
     border-top: 1px dashed rgba(74,109,140,0.2);
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
   }
 
   .pub-btn {
