@@ -452,6 +452,54 @@
     .section { padding: 60px 20px; }
     nav { padding: 0 20px; }
   }
+  /* ===== CONTACT BUTTON ===== */
+  .contact-btn {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .contact-btn:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 4px; }
+  .contact-btn > div { transition: color 0.2s, transform 0.2s; }
+  .contact-btn:hover {
+    background: rgba(184,147,58,0.14) !important;
+    border-color: var(--gold-light) !important;
+    transform: translateY(-6px) !important;
+    box-shadow: 0 10px 28px rgba(212,170,85,0.28), 0 0 0 1px var(--gold-light) !important;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s, border-color 0.2s !important;
+  }
+  .contact-btn:hover > div:first-child { transform: scale(1.15); }
+  .contact-btn:hover > div:last-child { color: var(--gold-light) !important; }
+  .contact-btn:active {
+    transform: translateY(-2px) scale(0.98) !important;
+    box-shadow: 0 4px 12px rgba(212,170,85,0.25), 0 0 0 1px var(--gold-light) !important;
+  }
+
+  /* ===== FLOATING SURVEY BUTTON ===== */
+  .survey-fab {
+    position: fixed; right: 28px; bottom: 28px; z-index: 200;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    background: var(--navy-dark);
+    border: 1px solid var(--gold);
+    padding: 12px 12px 10px;
+    text-decoration: none;
+    box-shadow: 0 8px 28px rgba(15,29,48,0.35);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    animation: fadeUp 0.6s ease 0.6s both;
+  }
+  .survey-fab::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-pale), transparent);
+  }
+  .survey-fab:hover { transform: translateY(-4px); border-color: var(--gold-light); box-shadow: 0 12px 36px rgba(15,29,48,0.45); }
+  .survey-fab img { width: 108px; height: 108px; display: block; background: #fff; padding: 6px; image-rendering: pixelated; }
+  .survey-fab span { color: var(--gold-pale); font-size: 0.95rem; letter-spacing: 1.5px; font-weight: 500; white-space: nowrap; }
+  .survey-fab:hover span { color: var(--gold-light); }
+
+  @media (max-width: 600px) {
+    .survey-fab { right: 16px; bottom: 16px; padding: 8px 8px 7px; gap: 6px; }
+    .survey-fab img { width: 72px; height: 72px; padding: 4px; }
+    .survey-fab span { font-size: 0.8rem; letter-spacing: 1px; }
+  }
 </style>
 </head>
 <body>
@@ -575,11 +623,11 @@
       如有學術合作、媒體採訪或研究諮詢需求，<br>歡迎透過以下方式與 TARC 聯絡。
     </p>
     <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
-      <div class="blueprint-card" style="padding:28px 36px; background:rgba(255,255,255,0.04); border-color:rgba(184,147,58,0.3);">
+      <a href="mailto:tarc.org2026@gmail.com" class="blueprint-card contact-btn" style="padding:28px 36px; background:rgba(255,255,255,0.04); border-color:rgba(184,147,58,0.3);">
         <div style="color:var(--gold-light); font-size: 1.75rem; margin-bottom:10px;">✉</div>
         <div style="color:rgba(255,255,255,0.5); font-size: 1.03rem; letter-spacing:2px; margin-bottom:6px;">EMAIL</div>
-        <div style="color:white; font-size: 1.15rem;">tarc@research.org.tw</div>
-      </div>
+        <div style="color:white; font-size: 1.15rem;">tarc.org2026@gmail.com</div>
+      </a>
       <div class="blueprint-card" style="padding:28px 36px; background:rgba(255,255,255,0.04); border-color:rgba(184,147,58,0.3);">
         <div style="color:var(--gold-light); font-size: 1.75rem; margin-bottom:10px;">📍</div>
         <div style="color:rgba(255,255,255,0.5); font-size: 1.03rem; letter-spacing:2px; margin-bottom:6px;">LOCATION</div>
@@ -602,6 +650,12 @@
   </div>
   <div class="footer-copy">© 2025 Taiwan ATT Research Consortium. All rights reserved.</div>
 </footer>
+
+<!-- FLOATING SURVEY BUTTON -->
+<a class="survey-fab" href="https://reurl.cc/WzVRO5" target="_blank" rel="noopener" aria-label="TARC 問卷連結">
+  <img src="data:image/png;base64,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" alt="TARC 問卷 QR code">
+  <span>TARC 問卷連結</span>
+</a>
 
 <script>
   // Smooth scroll
