@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>劉子洋 醫師 — TARC</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+  :root {
+    --navy-dark:#0f1d30; --navy-mid:#2a4a6b; --steel:#4a6d8c;
+    --gold:#b8933a; --gold-light:#d4aa55; --gold-pale:#f0d98a;
+    --white:#ffffff; --grid-color:rgba(74,109,140,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Noto Sans TC',sans-serif;background:var(--navy-dark);background-image:linear-gradient(var(--grid-color) 1px,transparent 1px),linear-gradient(90deg,var(--grid-color) 1px,transparent 1px);background-size:40px 40px;color:rgba(255,255,255,0.55);min-height:100vh;overflow-x:hidden;}
+  nav{background:rgba(10,18,28,0.94);border-bottom:2px solid var(--gold);position:sticky;top:0;z-index:100;padding:0 40px;backdrop-filter:blur(10px);}
+  .nav-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;}
+  .nav-logo{font-family:'Playfair Display',serif;color:var(--gold-light);font-size: 1.75rem;letter-spacing:3px;text-decoration:none;}
+  .nav-links{display:flex;gap:32px;list-style:none;}
+  .nav-links a{color:rgba(255,255,255,0.6);text-decoration:none;font-size: 1.07rem;letter-spacing:1px;font-weight:500;transition:color 0.2s;position:relative;padding-bottom:4px;}
+  .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold-light);transition:width 0.25s;}
+  .nav-links a:hover,.nav-links a.active{color:var(--gold-light);}
+  .nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+  .page-wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px;}
+  .breadcrumb{font-size: 0.97rem;color:rgba(255,255,255,0.22);letter-spacing:1px;margin-bottom:20px;display:flex;align-items:center;gap:7px;}
+  .breadcrumb a{color:var(--gold);text-decoration:none;opacity:0.8;transition:opacity 0.2s;}
+  .breadcrumb a:hover{opacity:1;}
+  .breadcrumb-sep{opacity:0.25;}
+  .back-btn{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,0.28);font-size: 1.0rem;letter-spacing:1px;text-decoration:none;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);padding:7px 16px;transition:all 0.2s;margin-bottom:28px;}
+  .back-btn:hover{color:var(--gold-light);border-color:rgba(184,147,58,0.4);background:rgba(184,147,58,0.05);}
+  .profile-card{background:var(--navy-dark);border:1px solid rgba(184,147,58,0.5);animation:cardIn 0.28s ease both;}
+  @keyframes cardIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+  .card-top-bar{height:4px;background:linear-gradient(90deg,var(--gold),var(--gold-pale),transparent);}
+  .card-header{padding:36px 40px 28px;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:flex-start;gap:24px;position:relative;overflow:hidden;}
+  .card-avatar{width:88px;height:88px;border:2px solid var(--gold);flex-shrink:0;overflow:hidden;background:var(--navy-mid);}
+  .card-avatar img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+  .card-meta{flex:1;padding-top:4px;}
+  .card-label{font-size: 0.87rem;letter-spacing:5px;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:8px;}
+  .card-name{font-family:'Noto Serif TC',serif;color:var(--white);font-size: 2.05rem;font-weight:700;margin-bottom:3px;line-height:1.2;}
+  .card-name-en{font-family:'Playfair Display',serif;font-style:italic;color:rgba(255,255,255,0.35);font-size:1.15rem;font-weight:700;margin-left:10px;letter-spacing:0.5px;}
+  .card-hospital{color:var(--gold-pale);font-size: 1.13rem;margin-bottom:4px;}
+  .card-spec{color:rgba(255,255,255,0.32);font-size: 1.03rem;font-weight:300;}
+  .card-city-tag{display:inline-flex;align-items:center;gap:5px;border:1px solid rgba(184,147,58,0.3);color:var(--gold-pale);font-size: 0.98rem;padding:4px 12px;margin-top:10px;letter-spacing:1px;}
+  .card-body{padding:28px 40px 40px;}
+  .section-label{font-size: 0.9rem;letter-spacing:4px;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:10px;margin-top:28px;}
+  .section-label:first-child{margin-top:0;}
+  .section-div{border:none;border-top:1px solid rgba(255,255,255,0.06);margin:24px 0 0;}
+  .profile-list{list-style:none;padding:0;}
+  .profile-list li{color:rgba(255,255,255,0.55);font-size: 1.1rem;line-height:1.7;font-weight:300;padding:5px 0 5px 14px;position:relative;border-bottom:1px dashed rgba(255,255,255,0.06);}
+  .profile-list li:last-child{border-bottom:none;}
+  .profile-list li::before{content:'▸';position:absolute;left:0;color:var(--gold);font-size: 0.9rem;top:8px;}
+  .profile-list .thesis{display:block;font-size:0.95rem;color:rgba(255,255,255,0.3);font-style:italic;line-height:1.55;margin-top:2px;}
+  .exp-item{display:flex;gap:20px;padding:7px 0;border-bottom:1px dashed rgba(255,255,255,0.06);}
+  .exp-item:last-child{border-bottom:none;}
+  .exp-year{font-family:'Playfair Display',serif;font-size: 0.97rem;color:rgba(184,147,58,0.7);min-width:110px;flex-shrink:0;padding-top:2px;}
+  .exp-desc{color:rgba(255,255,255,0.55);font-size: 1.1rem;line-height:1.7;font-weight:300;}
+  .expertise-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
+  .expertise-tag{font-size: 1.0rem;color:var(--gold-pale);border:1px solid rgba(184,147,58,0.3);background:rgba(184,147,58,0.06);padding:5px 14px;letter-spacing:0.5px;}
+  .pub-bar{height:3px;background:linear-gradient(90deg,var(--steel),rgba(74,109,140,0.15),transparent);margin:0 -40px 24px;}
+  .back-to-top{
+    position:fixed; bottom:32px; right:32px; z-index:200;
+    width:44px; height:44px;
+    background:var(--navy-dark);
+    border:1px solid rgba(184,147,58,0.5);
+    color:var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-size: 1.35rem; cursor:pointer;
+    opacity:0; pointer-events:none;
+    transition:opacity 0.25s, border-color 0.2s, background 0.2s;
+    text-decoration:none;
+  }
+  .back-to-top.visible{opacity:1; pointer-events:auto;}
+  .back-to-top:hover{background:rgba(184,147,58,0.1); border-color:var(--gold-light); color:var(--gold-light);}
+  footer{background:rgba(8,14,24,0.95);border-top:1px solid var(--gold);padding:40px;text-align:center;}
+  .footer-logo{font-family:'Playfair Display',serif;color:var(--gold-light);font-size: 2.05rem;letter-spacing:4px;margin-bottom:8px;}
+  .footer-name{color:rgba(255,255,255,0.3);font-size: 1.03rem;letter-spacing:2px;margin-bottom:24px;font-weight:300;}
+  .footer-links{display:flex;justify-content:center;gap:32px;margin-bottom:24px;flex-wrap:wrap;}
+  .footer-links a{color:rgba(255,255,255,0.4);text-decoration:none;font-size: 1.05rem;letter-spacing:1px;transition:color 0.2s;}
+  .footer-links a:hover{color:var(--gold-light);}
+  .footer-copy{color:rgba(255,255,255,0.15);font-size: 0.97rem;letter-spacing:1px;}
+  .pub-item{padding:16px 0;border-bottom:1px dashed rgba(255,255,255,0.07);}
+  .pub-item:last-child{border-bottom:none;}
+  .pub-num{font-family:'Playfair Display',serif;font-size: 1.18rem;color:rgba(184,147,58,0.55);letter-spacing:2px;margin-bottom:4px;}
+  .pub-authors{color:rgba(255,255,255,0.3);font-size: 1.125rem;line-height:1.5;font-weight:300;margin-bottom:4px;}
+  .pub-authors strong{color:var(--gold-pale);font-weight:500;}
+  .pub-title{color:rgba(255,255,255,0.82);font-size: 1.37rem;line-height:1.6;font-weight:400;margin-bottom:5px;font-family:'Noto Serif TC',serif;}
+  .pub-meta{color:rgba(255,255,255,0.28);font-size: 1.23rem;font-weight:300;}
+  .note-box{margin-top:20px;padding:12px 16px;background:rgba(74,109,140,0.08);border-left:2px solid rgba(184,147,58,0.3);}
+  .note-box span{font-size:0.75rem;color:rgba(255,255,255,0.3);font-weight:300;line-height:1.7;}
+  .lead{color:rgba(255,255,255,0.75);font-size:1.15rem;line-height:1.9;font-weight:300;margin:6px 0 4px;}
+  .card-links{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:4px;}
+  .card-links a{color:var(--gold-pale);font-size:1.0rem;text-decoration:none;border-bottom:1px solid rgba(184,147,58,0.3);padding-bottom:1px;transition:color 0.2s,border-color 0.2s;}
+  .card-links a:hover{color:var(--gold-light);border-color:var(--gold-light);}
+  a:focus-visible{outline:1px solid var(--gold-light);outline-offset:3px;}
+  @media(max-width:600px){
+    nav{padding:0 20px;} .nav-links{display:none;}
+    .page-wrap{padding:28px 16px 60px;}
+    .card-header{padding:28px 24px 22px;gap:18px;}
+    .card-avatar{width:68px;height:68px;}
+    .card-name{font-size: 1.7rem;}
+    .card-name-en{display:block;margin-left:0;font-size:1rem;margin-top:2px;}
+    .card-body{padding:22px 24px 32px;}
+    .pub-bar{margin:0 -24px 24px;}
+    .back-to-top{bottom:20px;right:20px;}
+    .exp-year{min-width:86px;font-size: 0.93rem;}
+    .pub-title{font-size:1.2rem;}
+    .pub-meta{font-size:1.05rem;}
+  }
+  @media (prefers-reduced-motion:reduce){.profile-card{animation:none;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">TARC</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">關於我們</a></li>
+      <li><a href="index.html#nav-cards">網站導覽</a></li>
+      <li><a href="team.html" class="active">核心成員</a></li>
+      <li><a href="research.html">研究領域</a></li>
+      <li><a href="ATT_School.html">ATT School</a></li>
+      <li><a href="index.html#contact">聯絡我們</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="breadcrumb">
+    <a href="index.html">首頁</a><span class="breadcrumb-sep">/</span>
+    <a href="team.html">核心成員</a><span class="breadcrumb-sep">/</span>
+    <span>劉子洋 醫師</span>
+  </div>
+  <a href="team.html" class="back-btn">← 返回核心成員</a>
+
+  <div class="profile-card">
+    <div class="card-top-bar"></div>
+
+    <div class="card-header">
+      <div class="card-avatar">
+        <img src="data:image/jpeg;base64,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" alt="劉子洋 醫師">
+      </div>
+      <div class="card-meta">
+        <div class="card-label">Member Profile · TARC</div>
+        <div class="card-name">劉子洋 醫師<span class="card-name-en">Chi Ieong Lau</span></div>
+        <div class="card-hospital">新光吳火獅紀念醫院</div>
+        <div class="card-spec">神經科 · 失智症中心</div>
+        <div class="card-city-tag">📍 台北</div>
+      </div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="section-label">現職</div>
+      <ul class="profile-list">
+        <li>新光吳火獅紀念醫院 神經科主治醫師</li>
+        <li>新光吳火獅紀念醫院 失智症中心主任</li>
+        <li>輔仁大學醫學院 助理教授（副教授升等審查中）</li>
+        <li>國立陽明交通大學 生醫光電研究所 兼任助理教授</li>
+      </ul>
+
+      <hr class="section-div">
+      <div class="section-label">學歷</div>
+      <ul class="profile-list">
+        <li>國防醫學院 醫學士（2004）</li>
+        <li>英國倫敦大學學院（UCL）認知神經科學 碩士 · 優等（2011）· 英國志奮領獎學金
+          <span class="thesis">Transcranial alternating current stimulation in an afternoon nap selectively disrupts prefrontal slow oscillations responsible for declarative memory consolidation</span></li>
+        <li>英國牛津大學 臨床神經科學 研究碩士（2013）
+          <span class="thesis">Light, photophobia and headache: an investigation of visually-induced migraine</span></li>
+        <li>英國倫敦大學學院（UCL）認知與臨床神經科學 博士（2024）
+          <span class="thesis">Exploring the mechanisms of chronic migraine: insights from behaviour, physiology and advanced neuroimaging</span></li>
+      </ul>
+
+      <hr class="section-div">
+      <div class="section-label">訓練 · 經歷</div>
+      <div class="exp-item"><span class="exp-year">2002–2004</span><span class="exp-desc">實習醫師，臺北榮民總醫院、高雄榮民總醫院</span></div>
+      <div class="exp-item"><span class="exp-year">2004–2008</span><span class="exp-desc">神經科住院醫師、總醫師，新光吳火獅紀念醫院</span></div>
+      <div class="exp-item"><span class="exp-year">2008–2009</span><span class="exp-desc">臨床研究員，新光吳火獅紀念醫院</span></div>
+      <div class="exp-item"><span class="exp-year">2010–迄今</span><span class="exp-desc">主治醫師，新光吳火獅紀念醫院</span></div>
+      <div class="exp-item"><span class="exp-year">2010–2011</span><span class="exp-desc">研究員，英國倫敦大學學院 認知神經科學研究所（Queen Square）</span></div>
+      <div class="exp-item"><span class="exp-year">2011–2013</span><span class="exp-desc">臨床研究員，英國牛津大學 Oxford Headache Centre, FMRIB</span></div>
+      <div class="exp-item"><span class="exp-year">2015–迄今</span><span class="exp-desc">輔仁大學醫學院 講師（2015–2020）、助理教授（2021–）</span></div>
+      <div class="exp-item"><span class="exp-year">2019–迄今</span><span class="exp-desc">失智症中心主任，新光吳火獅紀念醫院 · 連續六年獲政府經費建立士林區失智照護網絡</span></div>
+      <div class="exp-item"><span class="exp-year">2020–迄今</span><span class="exp-desc">兼任助理教授，國立陽明交通大學 生醫光電研究所</span></div>
+
+      <hr class="section-div">
+      <div class="section-label">學會服務</div>
+      <div class="exp-item"><span class="exp-year">2014–2017</span><span class="exp-desc">台灣頭痛學會 秘書長</span></div>
+      <div class="exp-item"><span class="exp-year">2017–迄今</span><span class="exp-desc">台灣頭痛學會 理監事 · 治療指引小組成員</span></div>
+      <div class="exp-item"><span class="exp-year">2025–迄今</span><span class="exp-desc">台灣腦刺激學會 理監事（創會成員）</span></div>
+      <div class="exp-item"><span class="exp-year"></span><span class="exp-desc">台灣臨床失智症學會 公共政策委員會 副召集人</span></div>
+      <div class="exp-item"><span class="exp-year">2021–2025</span><span class="exp-desc"><em>Progress in Brain Research</em> 編輯委員</span></div>
+
+      <hr class="section-div">
+      <div class="section-label">專科證照</div>
+      <ul class="profile-list">
+        <li>中華民國神經科專科醫師（2007）</li>
+        <li>神經重症專科醫師（2009）· 重症專科醫師（2026）</li>
+        <li>國際頭痛學會認證 Headache Master（證書編號 37，2015）</li>
+        <li>澳門醫學專科學院院士（神經科，2019）</li>
+      </ul>
+
+      <hr class="section-div">
+      <div class="section-label">專長</div>
+      <div class="expertise-list">
+        <span class="expertise-tag">失智症治療</span>
+        <span class="expertise-tag">輕度認知障礙</span>
+        <span class="expertise-tag">頭痛 · 偏頭痛</span>
+        <span class="expertise-tag">藥物過度使用頭痛</span>
+        <span class="expertise-tag">非侵入性腦刺激（tDCS）</span>
+        <span class="expertise-tag">Cognitive Neuroscience</span>
+        <span class="expertise-tag">神經影像 · 碎形維度分析</span>
+        <span class="expertise-tag">臨床神經電生理</span>
+        <span class="expertise-tag">神經重症</span>
+      </div>
+
+      <hr class="section-div">
+      <div class="section-label">近五年重要績效或研究成果</div>
+      <p class="lead">研究主題橫跨失智症、頭痛與腦刺激三大領域：以 tDCS 結合太極或互動式電腦認知訓練，改善輕度認知障礙長者的步態與執行功能；以 MRI 碎形維度分析建立輕度認知障礙與偏頭痛的早期影像標記；並提出藥物過度使用頭痛具依賴行為特徵。為 2022 年及 2026 年台灣偏頭痛急性治療指引第一作者，曾獲台灣臨床失智症學會國際研討會學術獎（2024）及亞洲失智症協會國際大會最佳海報獎（2022）。</p>
+
+      <hr class="section-div">
+      <div class="section-label">近五年研究著作</div>
+      <div class="pub-bar"></div>
+
+      <div class="pub-item">
+        <div class="pub-num">01</div>
+        <div class="pub-authors">Jao CW, Chen WH, Wu YT, Yeh JH, Walsh V, <strong>Lau CI</strong></div>
+        <div class="pub-title">Utilizing fractal dimension analysis of MRI as a biomarker for detecting and discriminating episodic migraine — a preliminary study.</div>
+        <div class="pub-meta"><em>Cephalalgia.</em> · 2026 Feb · 46(2), 3331024251414616 · 通訊作者</div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">02</div>
+        <div class="pub-authors"><strong>Lau CI</strong>, Chen WT, Hou TW, Liaw YC, Tu YH, et al.</div>
+        <div class="pub-title">2026 Taiwan guidelines for the acute pharmacologic treatment of migraine in adults.</div>
+        <div class="pub-meta"><em>Journal of the Chinese Medical Association.</em> · 2026 · accepted · 第一作者</div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">03</div>
+        <div class="pub-authors"><strong>Lau CI</strong>, Wang YF</div>
+        <div class="pub-title">Neuropsychological instruments and tasks for dependence behaviors in medication-overuse headache.</div>
+        <div class="pub-meta"><em>Current Pain and Headache Reports.</em> · 2025 Feb · 29(1), 54 · 第一作者</div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">04</div>
+        <div class="pub-authors"><strong>Lau CI</strong>, Liu MN, Cheng FY, Wang HC, Walsh V, Liao YY</div>
+        <div class="pub-title">Can transcranial direct current stimulation combined with interactive computerized cognitive training boost cognition and gait performance in older adults with mild cognitive impairment? A randomized controlled trial.</div>
+        <div class="pub-meta"><em>Journal of NeuroEngineering and Rehabilitation.</em> · 2024 Feb · 21(1), 26 · doi: 10.1186/s12984-024-01313-0 · 第一作者</div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">05</div>
+        <div class="pub-authors">Jao CW, Wu YT, Yeh JH, Tsai YF, Hsiao CY, <strong>Lau CI</strong></div>
+        <div class="pub-title">Exploring cortical morphology biomarkers of amnesic mild cognitive impairment using novel fractal dimension-based structural MRI analysis.</div>
+        <div class="pub-meta"><em>European Journal of Neuroscience.</em> · 2024 Oct · 通訊作者</div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">06</div>
+        <div class="pub-authors">Jao CW, Wu YT, Chen WH, Yeh JH, Tsai YF, Hsiao CY, Walsh V, <strong>Lau CI</strong></div>
+        <div class="pub-title">Brain structural network modular and connectivity alterations in subtypes of patients with migraine and medication overuse headache.</div>
+        <div class="pub-meta"><em>Progress in Brain Research.</em> · 2024 · doi: 10.1016/bs.pbr.2024.07.001 · 通訊作者</div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">07</div>
+        <div class="pub-authors"><strong>Lau CI</strong>, Chen WH, Wang HC, Walsh V</div>
+        <div class="pub-title">Decision-making impairment under ambiguity but not under risk may underlie medication overuse in patients with chronic migraine.</div>
+        <div class="pub-meta"><em>Headache.</em> · 2023 Jun · 63(6), 822-833 · 第一作者</div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">08</div>
+        <div class="pub-authors"><strong>Lau CI</strong>, Yeh JH, Tsai YF, Hsiao CY, Wu YT, Jao CW</div>
+        <div class="pub-title">Decreased brain structural network connectivity in patients with mild cognitive impairment: a novel fractal dimension analysis.</div>
+        <div class="pub-meta"><em>Brain Sciences.</em> · 2023 Jan · 13(1), 93 · 第一作者</div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">09</div>
+        <div class="pub-authors">Liu MN, Hu LY, Tsai CF, Hong CJ, Chou YH, Chang CC, Yang KC, You ZH, <strong>Lau CI</strong></div>
+        <div class="pub-title">Abnormalities of hippocampal subfield and amygdalar nuclei volumes and clinical correlates in behavioral variant frontotemporal dementia with obsessive-compulsive behaviors.</div>
+        <div class="pub-meta"><em>Brain Sciences.</em> · 2023 · 13, 1582 · 通訊作者</div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-num">10</div>
+        <div class="pub-authors">Liao Y, Liu MN, Wang HC, Walsh V, <strong>Lau CI</strong></div>
+        <div class="pub-title">Combining tDCS with Tai Chi to improve dual-task gait performance in older adults with mild cognitive impairment: a randomized controlled trial.</div>
+        <div class="pub-meta"><em>Frontiers in Aging Neuroscience.</em> · 2021 · 13, 766649 · doi: 10.3389/fnagi.2021.766649 · 通訊作者</div>
+      </div>
+
+      <div class="note-box">
+        <span>※ 以上為近五年代表性著作（依近年性、研究主題關聯及第一／通訊作者身分選列）。另與王署君教授合編專書 <em>Update on Emerging Treatments for Migraine</em>（Progress in Brain Research Vol. 255, Elsevier 2020）。完整著作列表請洽作者或參閱 PubMed。</span>
+      </div>
+
+      <hr class="section-div">
+      <div class="section-label">近年受邀演講（選列）</div>
+      <div class="exp-item"><span class="exp-year">2025/11</span><span class="exp-desc">Visual evoked potentials as neurophysiological markers for understanding migraine — 亞洲大洋洲臨床神經生理學會議，台北</span></div>
+      <div class="exp-item"><span class="exp-year">2025/10</span><span class="exp-desc">The evolving landscape of dementia treatment: from symptom control to disease modification — 澳門藥劑師公會，澳門</span></div>
+      <div class="exp-item"><span class="exp-year">2024/10</span><span class="exp-desc">學術獎得獎演講 — 台灣臨床失智症學會國際研討會，台北</span></div>
+      <div class="exp-item"><span class="exp-year">2024/08</span><span class="exp-desc">Paradigm shift: a new era in early Alzheimer's disease treatment landscape — 第 18 屆亞洲失智症協會國際大會，馬來西亞檳城</span></div>
+      <div class="exp-item"><span class="exp-year">2023/09</span><span class="exp-desc">Dysregulated reward processing linking to medication overuse headache in chronic migraine — International Headache Congress，韓國首爾</span></div>
+
+      <hr class="section-div">
+      <div class="section-label">相關連結</div>
+      <div class="card-links">
+        <a href="https://www.skh.org.tw/skh/19dcc04115.html?id=M006973&amp;division_id=2100&amp;regs=ND0025" target="_blank" rel="noopener">新光醫院醫師介紹</a>
+        <a href="https://researchinfo.fju.edu.tw/professors/4036" target="_blank" rel="noopener">輔仁大學研究人才</a>
+        <a href="https://bioph.nycu.edu.tw/faculty/adjunct-faculty-%e5%85%bc%e4%bb%bb%e5%b8%ab%e8%b3%87/dr-lau-chi-ieong-assistant-professor/" target="_blank" rel="noopener">陽明交大生醫光電所</a>
+        <a href="https://www.ucl.ac.uk/icn/research/research-groups/applied-cognitive-neuroscience" target="_blank" rel="noopener">UCL Applied Cognitive Neuroscience</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">TARC</div>
+  <div class="footer-name">TAIWAN ATT RESEARCH CONSORTIUM</div>
+  <div class="footer-links">
+    <a href="index.html#about">關於我們</a>
+    <a href="index.html#nav-cards">網站導覽</a>
+    <a href="team.html">核心成員</a>
+    <a href="research.html">研究領域</a>
+    <a href="index.html#contact">聯絡我們</a>
+  </div>
+  <div class="footer-copy">© 2025 Taiwan ATT Research Consortium. All rights reserved.</div>
+</footer>
+
+<a class="back-to-top" id="backToTop" href="#" aria-label="回到頂部">↑</a>
+
+<script>
+  const btn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 300);
+  });
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>
