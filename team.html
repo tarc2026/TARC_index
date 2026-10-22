@@ -487,6 +487,8 @@
         <div style="height: 4px; background: linear-gradient(90deg, var(--gold), var(--gold-pale), transparent);"></div>
         <div style="position: relative; height: 380px; overflow: hidden;">
           <iframe
+            id="teamMap"
+            title="TARC 成員醫院地圖"
             src="https://www.google.com/maps/d/embed?mid=1hMuq32vj_b3UhFqFgcwsb0EWyisQ1S0&ehbc=2E312F"
             width="100%"
             height="450"
@@ -923,12 +925,32 @@ function closePubModal(e) {
   }
 }
 
+/* 地圖：依行政區移動 Google My Maps 視角（ll = 中心緯度,經度；z = 縮放層級） */
+const MAP_BASE = 'https://www.google.com/maps/d/embed?mid=1hMuq32vj_b3UhFqFgcwsb0EWyisQ1S0&ehbc=2E312F';
+const mapViews = {
+  all:       null,                                   // 全部：使用地圖預設視角（全台）
+  taipei:    { ll: '25.0700,121.5300', z: 12 },      // 台大醫院、一森診所、天母品恆、新光醫院
+  shuangho:  { ll: '24.9930,121.4940', z: 14 },      // 雙和醫院
+  linkou:    { ll: '25.0620,121.3680', z: 14 },      // 林口長庚
+  taichung:  { ll: '24.1400,120.6660', z: 13 },      // 中國醫大附醫、中山醫大附醫
+  kaohsiung: { ll: '22.6500,120.3560', z: 14 }       // 高雄長庚
+};
+
+function moveMap(group) {
+  const frame = document.getElementById('teamMap');
+  if (!frame) return;
+  const v = mapViews[group];
+  const src = v ? `${MAP_BASE}&ll=${v.ll}&z=${v.z}` : MAP_BASE;
+  if (frame.src !== src) frame.src = src;
+}
+
 function filterHospital(group, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   document.querySelectorAll('.hospital-group').forEach(g => {
     g.classList.toggle('hidden', group !== 'all' && g.dataset.group !== group);
   });
+  moveMap(group);
 }
 
 function openMember(id) {
